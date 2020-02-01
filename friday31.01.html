@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fetching from Star Wars API</title>
+</head>
+
+<body>
+    <div id="frame"></div>
+    <script>
+        let StarWarsApiData;
+
+        fetch("https://swapi.co/api/people/")
+            .then(res => res.json())
+            .then(data => StarWarsApiData = data)
+            .then(() => formatData());
+
+        function formatData() {
+            console.log(StarWarsApiData);
+            let ul = document.createElement("ul");
+
+
+            for (let i = 0; i < StarWarsApiData.results.length; i++) {
+                let lis = document.createElement("li");
+                lis.innerHTML += StarWarsApiData.results[i].name;
+                ul.appendChild(lis);
+
+            }
+            document.getElementById("frame").appendChild(ul);
+        }
+    </script>
+</body>
+
+</html>
