@@ -1,0 +1,33 @@
+import React from "react";
+import "./styles.css";
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      weatherData: {},
+      main: {}
+    };
+  }
+  componentDidMount() {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=Athens&appid=3c5315624e1afabc9e0d6b216b8dea48"
+    )
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          id: data.id,
+          name: data.name,
+          temp: Math.floor(data.main.temp  - 273.15 )
+        });
+      });
+  }
+  render() {
+    return (
+      <div>
+        <h1>City name: {this.state.name}</h1>
+        <p>City id:{this.state.id}</p>
+        <p>Temperature:{this.state.temp}</p>
+      </div>
+    );
+  }
+}
